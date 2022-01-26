@@ -14,9 +14,9 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $ip = $request->getClientIp();
-        $browserLanguage = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        dd($browserLanguage);
+        // $ip = $request->getClientIp();
+        // $browserLanguage = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        // dd($browserLanguage);
         return $this->render('home/index.html.twig');
     }
 }
