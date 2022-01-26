@@ -6,10 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\User;
 
 /**
  * @Route("/admin")
+ * @IsGranted("ROLE_ADMIN")
  */
 class AdminController extends AbstractController
 {
@@ -30,8 +32,11 @@ class AdminController extends AbstractController
         $this->denyAccessUnlessGranted("ROLE_ADMIN");
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) 
         {
-            $this->doctrine->remove($user);
+            $this->doctrine->delete($user);
             $this->doctrine->flush();
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->remove($user);
+            // $entityManager->flush();
         }
     }
 }
