@@ -25,7 +25,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/delete", name="account_delete")
+     * @Route("/delete/{id}", name="account_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user) 
     {
@@ -38,5 +38,6 @@ class AdminController extends AbstractController
             // $entityManager->remove($user);
             // $entityManager->flush();
         }
+        return $this->redirectToRoute("home");
     }
 }
