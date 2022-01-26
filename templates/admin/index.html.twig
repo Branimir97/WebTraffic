@@ -6,10 +6,10 @@
     
     {% if app.user %}
         <div class="container-fluid">   
-            <h2 class="p-3 bg-light text-center">Admin panel</h2> 
+            <h2 class="p-3 bg-light text-center">Admin panel <i class="fas fa-chalkboard-teacher"></i></h2> 
             <div class="text-right">
-                <a class="btn btn-outline-info" href="{{ path('app_logout') }}">Logout</a>
-                <a class="btn btn-danger text-white">Delete account</a>
+                <a class="btn btn-danger text-white">Delete account <i class="fas fa-trash"></i></a>
+                <a class="btn btn-outline-info" href="{{ path('app_logout') }}">Logout <i class="fas fa-sign-out-alt"></i></a>
             </div>
         </div>
     {% endif %}    
