@@ -8,8 +8,42 @@
         <div class="container-fluid">   
             <h2 class="p-3 bg-light text-center">Admin panel <i class="fas fa-chalkboard-teacher"></i></h2> 
             <div class="text-right">
-                <a class="btn btn-danger text-white">Delete account <i class="fas fa-trash"></i></a>
+                <a class="btn btn-danger text-white" href="{{ path('app_logout', { id:app.user.id }) }}">Delete account <i class="fas fa-trash"></i></a>
                 <a class="btn btn-outline-info" href="{{ path('app_logout') }}">Logout <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+
+            <div class="table-responsive mt-2">
+            <table class="table table-striped table-hover">
+                <caption>List of visitors</caption>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>prm1</th>
+                        <th>prm2</th>
+                        <th>prm3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>a</td>
+                        <td>a</td>
+                        <td>a</td>
+                        <td>a</td>
+                    </tr>   
+                    <tr>
+                        <td>a</td>
+                        <td>a</td>
+                        <td>a</td>
+                        <td>a</td>
+                    </tr>
+                    <tr>
+                        <td>a</td>
+                        <td>a</td>
+                        <td>a</td>
+                        <td>a</td>
+                    </tr> 
+                </tbody>
+            </table>
             </div>
         </div>
     {% endif %}    
