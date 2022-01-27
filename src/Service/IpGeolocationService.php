@@ -50,6 +50,12 @@ class IpGeolocationService
             $this->entityManager->persist($visitor);
             $this->entityManager->flush();
         } 
+        $this->increaseVisitsNumber($visitor);
+        
+    }
+
+    public function increaseVisitsNumber(Visitor $visitor)
+    {
         $visitor->setVisitsNumber($visitor->getVisitsNumber()+1);
         $this->entityManager->persist($visitor);
         $this->entityManager->flush();
