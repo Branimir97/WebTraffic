@@ -15,7 +15,7 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, VisitorHelperService $service): Response
     {
-        $ip = "46.188.144.192";//$request->getClientIp();
+        $ip = "113.77.157.195";//$request->getClientIp();
         $referer = $request->headers->get('referer');
         $service->saveVisitor($ip, $referer ? $referer : "undefined");
         return $this->render('home/index.html.twig');

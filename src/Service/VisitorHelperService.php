@@ -25,8 +25,8 @@ class VisitorHelperService
 
     public function saveVisitor(string $ip, string $referer)
     {
-        $checkVisitorByIp = $this->visitorRepository->findOneBy(['ip' => $ip]);
-        if(!$checkVisitorByIp) {
+        $existingVisitor = $this->visitorRepository->findOneBy(['ip' => $ip]);
+        if(!$existingVisitor) {
             $visitor = new Visitor();
             $visitorInformations = $this->ipGeoService->gatherInformation($ip);
             $visitor->setIp($ip);
@@ -40,9 +40,10 @@ class VisitorHelperService
             $visitor->setVisitsNumber(1);
             $visitor->setReferer($referer);
             $this->persistAndFlush($visitor);
-        } 
-        $this->renewLastReferer($visitor, $referer);
-        $this->increaseVisitsNumber($visitor);
+        } else {
+            $this->renewLastReferer($existingVisitor, $referer);
+            $this->increaseVisitsNumber($existingVisitor);
+        }
     }
 
     public function increaseVisitsNumber(Visitor $visitor)
