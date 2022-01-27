@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @Route("/admin")
@@ -25,18 +27,17 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="account_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="account_delete", methods={"POST"})
      */
-    public function delete(Request $request, User $user) 
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager) 
     {
         $this->denyAccessUnlessGranted("ROLE_ADMIN");
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) 
         {
-            $this->doctrine->delete($user);
-            $this->doctrine->flush();
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->remove($user);
-            // $entityManager->flush();
+            $session = new Session();
+            $session->invalidate();
+            $entityManager->remove($user);
+            $entityManager->flush();
         }
         return $this->redirectToRoute("home");
     }
