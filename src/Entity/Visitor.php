@@ -64,6 +64,11 @@ class Visitor
     private $visitsNumber;
 
     /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $referer;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
@@ -184,6 +189,18 @@ class Visitor
     public function setVisitsNumber(int $visitsNumber): self
     {
         $this->visitsNumber = $visitsNumber;
+
+        return $this;
+    }
+
+    public function getReferer(): ?string
+    {
+        return $this->referer;
+    }
+
+    public function setReferer(?string $referer): self
+    {
+        $this->referer = $referer;
 
         return $this;
     }

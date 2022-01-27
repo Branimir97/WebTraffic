@@ -31,7 +31,7 @@ class IpGeolocationService
         ];
     }
 
-    public function saveVisitor(string $ip)
+    public function saveVisitor(string $ip, string $referer)
     {
         $visitor = $this->visitorRepository->findOneBy(['ip' => $ip]);
         if(!$visitor) {

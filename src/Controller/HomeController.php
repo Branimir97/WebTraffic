@@ -15,8 +15,9 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, IpGeolocationService $service): Response
     {
-        $ip = "46.188.144.192";
-        $service->saveVisitor($ip);
+        $ip = "46.188.144.192";//$request->getClientIp();
+        $referer = $request->headers->get('referer');
+        $service->saveVisitor($ip, $referer);
         return $this->render('home/index.html.twig');
     }
 }
