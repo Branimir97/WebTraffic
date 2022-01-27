@@ -24,26 +24,20 @@ class VisitorHelperService
     }
 
     public function saveVisitor(string $ip, string $referer)
-    {
-        $existingVisitor = $this->visitorRepository->findOneBy(['ip' => $ip]);
-        if(!$existingVisitor) {
-            $visitor = new Visitor();
-            $visitorInformations = $this->ipGeoService->gatherInformation($ip);
-            $visitor->setIp($ip);
-            $visitor->setCountryName($visitorInformations["countryName"]);
-            $visitor->setCountryCode($visitorInformations["countryCode"]);
-            $visitor->setContinentName($visitorInformations["continentName"]);
-            $visitor->setContinentCode($visitorInformations["continentCode"]);
-            $visitor->setCurrencyCode($visitorInformations["currencyCode"]);
-            $visitor->setTimezone($visitorInformations["timezone"]);
-            $visitor->setSpentTime(new DateTime("00:00:00"));
-            $visitor->setVisitsNumber(1);
-            $visitor->setReferer($referer);
-            $this->persistAndFlush($visitor);
-        } else {
-            $this->renewLastReferer($existingVisitor, $referer);
-            $this->increaseVisitsNumber($existingVisitor);
-        }
+    { 
+        $visitor = new Visitor();
+        $visitorInformations = $this->ipGeoService->gatherInformation($ip);
+        $visitor->setIp($ip);
+        $visitor->setCountryName($visitorInformations["countryName"]);
+        $visitor->setCountryCode($visitorInformations["countryCode"]);
+        $visitor->setContinentName($visitorInformations["continentName"]);
+        $visitor->setContinentCode($visitorInformations["continentCode"]);
+        $visitor->setCurrencyCode($visitorInformations["currencyCode"]);
+        $visitor->setTimezone($visitorInformations["timezone"]);
+        $visitor->setSpentTime(new DateTime("00:00:00"));
+        $visitor->setVisitsNumber(1);
+        $visitor->setReferer($referer);
+        $this->persistAndFlush($visitor);    
     }
 
     public function increaseVisitsNumber(Visitor $visitor)
@@ -65,5 +59,16 @@ class VisitorHelperService
     {
         $this->entityManager->persist($visitor);
         $this->entityManager->flush();
+    }
+
+    public function renewIpAddress(Visitor $visitor, string $newIpAddress)
+    {
+        $visitor->setIp($newIpAddress);
+        $this->persistAndFlush($visitor);
+    }
+
+    public function getVisitor(string $ip)
+    {
+        return $this->visitorRepository->findOneBy(['ip' => $ip]);    
     }
 }
