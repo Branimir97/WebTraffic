@@ -26,6 +26,7 @@
                         <th>Timezone</th>
                         <th>Spent time</th>
                         <th>Visits number</th>
+                        <th>Referer</th>
                         <th>First visit</th>
                     </tr>
                 </thead>
@@ -42,6 +43,7 @@
                             <td>{{ item.timezone }}</td>
                             <td>{{ item.spentTime|date("H:i:s") }}</td>
                             <td>{{ item.visitsNumber }}</td>
+                            <td>{{ item.referer }}</td>
                             <td>{{ item.createdAt|date("m/d/Y") }}</td>
                         </tr>    
                     {% endfor %}
