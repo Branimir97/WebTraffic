@@ -16,9 +16,7 @@ class HomeController extends AbstractController
     {
         $ip = "46.188.144.192";
 
-        
-
-        dd($service->gatherInformation($ip));
+        $service->saveVisitor($ip);
         return $this->render('home/index.html.twig');
     }
 }
