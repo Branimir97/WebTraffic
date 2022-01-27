@@ -24,7 +24,7 @@ class Visitor
     private $ip;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $countryName;
 
