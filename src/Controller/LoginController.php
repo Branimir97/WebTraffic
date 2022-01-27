@@ -14,10 +14,13 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('auth/login.html.twig',
-        ['last_username' => $lastUsername, 'error' => $error]);
+        if(!$this->isGranted("ROLE_ADMIN")) {
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+            return $this->render('auth/login.html.twig',
+            ['last_username' => $lastUsername, 'error' => $error]);
+        } 
+        return $this->redirectToRoute("admin");
     }
 
     /**

@@ -20,24 +20,27 @@ class RegistrationController extends AbstractController
                             UserPasswordHasherInterface $userPasswordHasher, 
                             EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        if(!$this->isGranted("ROLE_ADMIN")) {
+            $user = new User();
+            $form = $this->createForm(RegistrationFormType::class, $user);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $entityManager->persist($user);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_login');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+                $entityManager->persist($user);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_login');
+            }
+
+            return $this->render('auth/register.html.twig', [
+                'registrationForm' => $form->createView(),
+            ]);
         }
-
-        return $this->render('auth/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        return $this->redirectToRoute("admin");
     }
 }
