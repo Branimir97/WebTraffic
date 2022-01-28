@@ -7,14 +7,10 @@
             var startTime = new Date();  
             $(window).on("unload", function() { 
                 var endTime = new Date();  
-                document.cookie="elapsed="+(endTime-startTime)/1000;
+                document.cookie="elapsed="+(endTime-startTime);
             });
         });
     </script>
 {% endblock %}
-{% block body %}
-{{
-    elapsed
-}}
-{% endblock %}
+{% block body %}{% endblock %}
 

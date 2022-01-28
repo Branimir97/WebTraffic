@@ -24,7 +24,7 @@
                         <th>Continent code</th>
                         <th>Currency code</th>
                         <th>Timezone</th>
-                        <th>Spent time</th>
+                        <th>Spent time [s]</th>
                         <th>Visits number</th>
                         <th>Referer</th>
                         <th>First visit</th>
@@ -41,7 +41,7 @@
                             <td>{{ item.continentCode }}</td>
                             <td>{{ item.currencyCode }}</td>
                             <td>{{ item.timezone }}</td>
-                            <td>{{ item.spentTime|date("H:i:s") }}</td>
+                            <td>{{ (item.spentTime)/1000 }}</td>
                             <td>{{ item.visitsNumber }}</td>
                             <td>{{ item.referer }}</td>
                             <td>{{ item.createdAt|date("m/d/Y") }}</td>

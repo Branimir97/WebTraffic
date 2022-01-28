@@ -34,7 +34,7 @@ class VisitorHelperService
         $visitor->setContinentCode($visitorInformations["continentCode"]);
         $visitor->setCurrencyCode($visitorInformations["currencyCode"]);
         $visitor->setTimezone($visitorInformations["timezone"]);
-        $visitor->setSpentTime(new DateTime("00:00:00"));
+        $visitor->setSpentTime(0);
         $visitor->setVisitsNumber(1);
         $visitor->setReferer($referer);
         $this->persistAndFlush($visitor);    
@@ -67,13 +67,20 @@ class VisitorHelperService
         $this->persistAndFlush($visitor);
     }
 
-    public function getVisitor(string $ip)
+    public function getVisitorByIp(string $ip)
     {
         return $this->visitorRepository->findOneBy(['ip' => $ip]);    
     }
 
+    public function getVisitorByOldIp(string $ip)
+    {
+        return $this->visitorRepository->findOneBy(['previousIp' => $ip]);    
+    }
+
     public function increaseSpentTime(Visitor $visitor, float $elapsed)
     {
-        
+        $previousState = $visitor->getSpentTime();
+        $visitor->setSpentTime($previousState + $elapsed);
+        $this->persistAndFlush($visitor);
     }
 }
