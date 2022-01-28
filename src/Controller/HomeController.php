@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Service\VisitorHelperService;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +15,7 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, VisitorHelperService $service): Response
     {
-        $ip = "16.62.54.4";//$request->getClientIp();
+        $ip = "1.185.75.143";//$request->getClientIp();
         $referer = $request->headers->get('referer');
         $elapsed = 0;
         if(isset($_COOKIE['elapsed']))

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Service;
+use App\Service\Contract\IGeoApiService;
 
-class IpGeolocationService
+class GeoApiService implements IGeoApiService
 {
     public function gatherInformation(string $ip) 
     {

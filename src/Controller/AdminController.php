@@ -34,7 +34,8 @@ class AdminController extends AbstractController
     /**
      * @Route("/delete/{id}", name="account_delete", methods={"POST"})
      */
-    public function deleteAccount(Request $request, User $user, EntityManagerInterface $entityManager) 
+    public function deleteAccount(Request $request, User $user, 
+                                  EntityManagerInterface $entityManager) 
     {
         $this->denyAccessUnlessGranted("ROLE_ADMIN");
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) 
@@ -50,7 +51,8 @@ class AdminController extends AbstractController
     /**
      * @Route("/delete/visitor/{id}", name="visitor_delete", methods={"POST"})
      */
-    public function deleteVisitor(Request $request, Visitor $visitor, EntityManagerInterface $entityManager): Response
+    public function deleteVisitor(Request $request, Visitor $visitor, 
+                                  EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$visitor->getId(), $request->request->get('_token'))) {
             $entityManager->remove($visitor);

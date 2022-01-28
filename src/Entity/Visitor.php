@@ -80,11 +80,6 @@ class Visitor
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="string", length=45)
-     */
-    private $previousIp;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -230,18 +225,6 @@ class Visitor
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getPreviousIp(): ?string
-    {
-        return $this->previousIp;
-    }
-
-    public function setPreviousIp(string $previousIp): self
-    {
-        $this->previousIp = $previousIp;
 
         return $this;
     }

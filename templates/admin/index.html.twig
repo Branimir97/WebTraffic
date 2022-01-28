@@ -5,10 +5,16 @@
 {% block body %}
     {% if app.user %}
         <div class="container-fluid">   
-            <h2 class="p-3 bg-light text-center">Admin panel <i class="fas fa-chalkboard-teacher"></i></h2> 
-            <a href="{{ path('home') }}"><i class="far fa-arrow-alt-circle-left"></i> Homepage</a>
+            <h2 class="p-3 bg-light text-center">
+                Admin panel <i class="fas fa-chalkboard-teacher"></i>
+            </h2> 
+            <a href="{{ path('home') }}"><i class="far fa-arrow-alt-circle-left"></i> 
+                Homepage
+            </a>
             <div class="text-right">
-                <a class="btn btn-outline-info" href="{{ path('app_logout') }}">Logout <i class="fas fa-sign-out-alt"></i></a>
+                <a class="btn btn-outline-info" href="{{ path('app_logout') }}">
+                    Logout <i class="fas fa-sign-out-alt"></i>
+                </a>
             </div>
             {% include "admin/account_delete_form.html.twig" %}
             <div class="table-responsive mt-2">
