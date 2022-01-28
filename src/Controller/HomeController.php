@@ -16,7 +16,7 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, VisitorHelperService $service): Response
     {
-        $ip = "225.53.45.165";//$request->getClientIp();
+        $ip = "16.62.54.4";//$request->getClientIp();
         $referer = $request->headers->get('referer');
         $elapsed = 0;
         if(isset($_COOKIE['elapsed']))
@@ -26,24 +26,27 @@ class HomeController extends AbstractController
 
         if(isset($_COOKIE['SITE_VISITED']))
         {
-            $visitor = $service->getVisitorByIp($_COOKIE['SITE_VISITED']);
-            // if ($_COOKIE['SITE_VISITED'] !== $ip) {
-            //     setcookie('SITE_VISITED', $ip, time()+60*60*60*24*30);
-            // } 
-            $service->renewLastReferer($visitor, $referer ? $referer : "undefined");
-            $service->increaseVisitsNumber($visitor);      
-            $service->increaseSpentTime($visitor, $elapsed);     
-        }
-
-        if(!isset($_COOKIE['SITE_VISITED']))
-        {
-            // if(!is_null($service->getVisitorByIp($ip))) {
-            //     $service->increaseVisitsNumber($service->getVisitorByIp($ip));      
-            // } else {
+            $visitor = $service->getVisitorByIp($ip);
+            if(!is_null($visitor)){
+                $service->renewLastReferer($visitor, $referer ? $referer : "undefined");
+                $service->increaseVisitsNumber($visitor);      
+                $service->increaseSpentTime($visitor, $elapsed);    
+            } else {
                 $service->saveVisitor($ip, $referer ? $referer : "undefined");
-            
-            setcookie('SITE_VISITED', $ip, time()+60*60*60*24*30);
-        }
+            }       
+            setcookie('SITE_VISITED', $ip, time()+60*60*60*24*30);     
+        } else {
+            $visitor = $service->getVisitorByIp($ip);
+            if(!is_null($visitor))
+            {
+                $service->renewLastReferer($visitor, $referer ? $referer : "undefined");
+                $service->increaseVisitsNumber($visitor);      
+                $service->increaseSpentTime($visitor, $elapsed);    
+            } else {
+                $service->saveVisitor($ip, $referer ? $referer : "undefined");
+            }
+            setcookie('SITE_VISITED', $ip, time()+60*60*60*24*30);                   
+        }        
         return $this->render('home/index.html.twig', ['elapsed'=>$elapsed]);
     }
 }

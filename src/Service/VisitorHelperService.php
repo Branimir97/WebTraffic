@@ -6,7 +6,6 @@ use App\Entity\Visitor;
 use App\Repository\VisitorRepository;
 use App\Service\IpGeolocationService;
 use Doctrine\ORM\EntityManagerInterface;
-use DateTime;
 
 class VisitorHelperService
 {

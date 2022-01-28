@@ -31,20 +31,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in visitors %}
+                    {% for visitor in visitors %}
                         <tr>
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.ip }}</td>
-                            <td>{{ item.countryName }}</td>
-                            <td>{{ item.countryCode }}</td>
-                            <td>{{ item.continentName }}</td>
-                            <td>{{ item.continentCode }}</td>
-                            <td>{{ item.currencyCode }}</td>
-                            <td>{{ item.timezone }}</td>
-                            <td>{{ (item.spentTime)/1000 }}</td>
-                            <td>{{ item.visitsNumber }}</td>
-                            <td>{{ item.referer }}</td>
-                            <td>{{ item.createdAt|date("m/d/Y") }}</td>
+                            <td>{{ visitor.id }}</td>
+                            <td>{{ visitor.ip }}</td>
+                            <td>{{ visitor.countryName }}</td>
+                            <td>{{ visitor.countryCode }}</td>
+                            <td>{{ visitor.continentName }}</td>
+                            <td>{{ visitor.continentCode }}</td>
+                            <td>{{ visitor.currencyCode }}</td>
+                            <td>{{ visitor.timezone }}</td>
+                            <td>{{ (visitor.spentTime)/1000 }}</td>
+                            <td>{{ visitor.visitsNumber }}</td>
+                            <td>{{ visitor.referer }}</td>
+                            <td>{{ visitor.createdAt|date("m/d/Y") }}</td>
+                            <td>
+                                {{ include('admin/visitor_delete_form.html.twig') }}
+                            </td>
                         </tr>    
                     {% endfor %}
                 </tbody>
