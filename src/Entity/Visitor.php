@@ -54,7 +54,7 @@ class Visitor
     private $timezone;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $spentTime;
 
@@ -169,12 +169,12 @@ class Visitor
         return $this;
     }
 
-    public function getSpentTime(): ?\DateTimeInterface
+    public function getSpentTime(): ?int
     {
         return $this->spentTime;
     }
 
-    public function setSpentTime(\DateTimeInterface $spentTime): self
+    public function setSpentTime(int $spentTime): self
     {
         $this->spentTime = $spentTime;
 

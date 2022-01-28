@@ -71,4 +71,9 @@ class VisitorHelperService
     {
         return $this->visitorRepository->findOneBy(['ip' => $ip]);    
     }
+
+    public function increaseSpentTime(Visitor $visitor, float $elapsed)
+    {
+        
+    }
 }
